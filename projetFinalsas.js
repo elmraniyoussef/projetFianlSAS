@@ -183,21 +183,67 @@ const trips = [
 ];
 
 
-function afficherTrajets(array) {
+function afficherTrajets(trips) {
 
-    for (let i in array){
+    for (let i in trips){
 
-        console.log("Trajet #" + array[i].id);
-        console.log("Départ : " + array[i].departure);
-        console.log("Destination : " + array[i].destination);
-        console.log("Heure de départ : " + array[i].departureTime);
-        console.log("Heure d'arrivée : " + array[i].arrivalTime);
-        console.log("Prix : " + array[i].price + " DH");
-        console.log("Places disponibles : " + array[i].availableSeats);
+        console.log("Trajet #" + trips[i].id);
+        console.log("Départ : " + trips[i].departure);
+        console.log("Destination : " + trips[i].destination);
+        console.log("Heure de départ : " + trips[i].departureTime);
+        console.log("Heure d'arrivée : " + trips[i].arrivalTime);
+        console.log("Prix : " + trips[i].price + " DH");
+        console.log("Places disponibles : " + trips[i].availableSeats);
 
         console.log("-------------------------");
     }
 }
 
-afficherTrajets(trips) ;          
-          
+afficherTrajets(trips) ;   
+
+
+      a
+  const tickets = []; 
+  let nextTicketId = 1;
+
+function acheterTicket() {
+
+    let passengerName = prompt("Nom du passager : ");
+
+    let tripId = Number(prompt("Id du trajet : "));
+
+    let trip = trips.find(function(trip) {
+        return trip.id === tripId;
+    });
+
+    if (!trip) {
+        console.log("Trajet introuvable.");
+        return;
+    }
+
+    if (trip.availableSeats === 0) {
+        console.log("Train complet.");
+        return;
+    }
+
+    let seatNumber = 51 - trip.availableSeats;
+
+    trip.availableSeats--;
+
+    let ticket = {
+        id: nextTicketId,
+        passengerName: passengerName,
+        tripId: tripId,
+        seatNumber: seatNumber,
+        price: trip.price
+    };
+
+    nextTicketId++;
+
+    tickets.push(ticket);
+
+    console.log("Ticket acheté avec succès.");
+
+    console.log(ticket);
+}
+acheterTicket();
