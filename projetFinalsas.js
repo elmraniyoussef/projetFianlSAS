@@ -181,8 +181,23 @@ const trips = [
         availableSeats: 50
     }
 ];
-
-
+let prompt = require("prompt-sync")();
+let tickets = [];
+function afficherMenu() {
+    console.log("\n=============================");
+    console.log("     RAILWAY MANAGER");
+    console.log("=============================");
+    console.log("1. Afficher les trajets");
+    console.log("2. Acheter un ticket");
+    console.log("3. Afficher les tickets");
+    console.log("4. Annuler un ticket");
+    console.log("5. Rechercher un ticket");
+    console.log("6. Filtrer les trajets");
+    console.log("7. Trier les trajets");
+    console.log("8. Statistiques");
+    console.log("0. Quitter \n");
+}
+afficherMenu()
 function afficherTrajets(trips) {
 
     for (let i in trips){
@@ -202,48 +217,7 @@ function afficherTrajets(trips) {
 afficherTrajets(trips) ;   
 
 
-      a
-  const tickets = []; 
-  let nextTicketId = 1;
 
-function acheterTicket() {
 
-    let passengerName = prompt("Nom du passager : ");
-
-    let tripId = Number(prompt("Id du trajet : "));
-
-    let trip = trips.find(function(trip) {
-        return trip.id === tripId;
-    });
-
-    if (!trip) {
-        console.log("Trajet introuvable.");
-        return;
-    }
-
-    if (trip.availableSeats === 0) {
-        console.log("Train complet.");
-        return;
-    }
-
-    let seatNumber = 51 - trip.availableSeats;
-
-    trip.availableSeats--;
-
-    let ticket = {
-        id: nextTicketId,
-        passengerName: passengerName,
-        tripId: tripId,
-        seatNumber: seatNumber,
-        price: trip.price
-    };
-
-    nextTicketId++;
-
-    tickets.push(ticket);
-
-    console.log("Ticket acheté avec succès.");
-
-    console.log(ticket);
-}
-acheterTicket();
+      
+  
