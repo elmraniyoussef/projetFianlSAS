@@ -469,11 +469,38 @@ function statistiques() {
     let total = 0;
 
     for (let i = 0; i < tickets.length; i++) {
-
         total = total + tickets[i].prix;
-
     }
 
     console.log("Revenu total : " + total + " DH");
-}
 
+    // Trajet le plus vendu
+    let compteur = {};
+
+    for (let i = 0; i < tickets.length; i++) {
+
+        let id = tickets[i].trajetId;
+
+        if (compteur[id] === undefined) {
+            compteur[id] = 1;
+        } else {
+            compteur[id]++;
+        }
+    }
+
+    let trajetPlusVendu = null;
+    let max = 0;
+
+    for (let id in compteur) {
+
+        if (compteur[id] > max) {
+            max = compteur[id];
+            trajetPlusVendu = id;
+        }
+    }
+
+    if (trajetPlusVendu !== null) {
+        console.log("Trajet le plus vendu : " + trajetPlusVendu);
+        console.log("Nombre de tickets vendus : " + max);
+    }
+}
