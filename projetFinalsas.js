@@ -197,7 +197,7 @@ function afficherMenu() {
     console.log("8. Statistiques");
     console.log("0. Quitter \n");
 }
-afficherMenu()
+// afficherMenu()
 function afficherTrajets(trips) {
 
     for (let i in trips){
@@ -214,7 +214,7 @@ function afficherTrajets(trips) {
     }
 }
 
-afficherTrajets(trips) ;   
+// afficherTrajets(trips) ;   
 
 
 function rechercheTrajet(trips, idTrajet) {
@@ -292,7 +292,7 @@ function acheterTicket() {
     // Trajet introuvable
     console.log("Trajet introuvable.");
 }
-acheterTicket();
+// acheterTicket();
 
 
 function afficherTickets() {
@@ -316,7 +316,7 @@ function afficherTickets() {
     }
 }
 
-afficherTickets();
+// afficherTickets();
 
 
 
@@ -346,7 +346,7 @@ function annulerTicket() {
 
     console.log("Ticket introuvable.");
 }
-annulerTicket();
+// annulerTicket();
 
 function rechercherTicket() {
     let nom = prompt("Nom du passager : ");
@@ -363,7 +363,7 @@ function rechercherTicket() {
 
     }
 }
-rechercherTicket()
+// rechercherTicket()
 
 function menu() {
 
@@ -373,43 +373,43 @@ function menu() {
 
         afficherMenu();
 
-        choix = prompt("Votre choix : ");
-
+        
+        choix = +prompt("Votre choix : ");
         switch (choix) {
-
-            case "1":
+            
+            case 1:
                 afficherTrajets();
                 break;
 
-            case "2":
+            case 2:
                 acheterTicket();
                 break;
 
-            case "3":
+            case 3:
                 afficherTickets();
                 break;
 
-            case "4":
+            case 4:
                 annulerTicket();
                 break;
 
-            case "5":
+            case 5:
                 rechercherTicket();
                 break;
 
-            case "6":
+            case 6:
                 filtrerTrajets();
                 break;
 
-            case "7":
+            case 7:
                 trierTrajets();
                 break;
 
-            case "8":
+            case 8:
                 statistiques();
                 break;
 
-            case "0":
+            case 0:
                 console.log("Au revoir !");
                 break;
 
@@ -417,8 +417,31 @@ function menu() {
                 console.log("Choix invalide.");
         }
 
-    } while (choix !== "0");
+    } while (choix !== 0);
 }
 menu();
+function filtrerTrajets() {
+    let ville = prompt("Donner la ville de départ : ");
+
+    let resultats = trips.filter(function(trip) {
+        return trip.departure.toLowerCase() === ville.toLowerCase();
+    });
+
+    if (resultats.length === 0) {
+        console.log("Aucun trajet trouvé.");
+        return;
+    }
+
+    console.log("=== TRAJETS TROUVÉS ===");
+
+    for (let i = 0; i < resultats.length; i++) {
+        console.log(
+            resultats[i].id + " - " +
+            resultats[i].departure + " -> " +
+            resultats[i].destination +
+            " | Prix : " + resultats[i].price + " DH"
+        );
+    }
+}
 
 
