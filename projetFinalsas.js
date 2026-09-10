@@ -346,7 +346,6 @@ function annulerTicket() {
 
     console.log("Ticket introuvable.");
 }
-
 annulerTicket();
 
 function rechercherTicket() {
@@ -365,4 +364,61 @@ function rechercherTicket() {
     }
 }
 rechercherTicket()
+
+function menu() {
+
+    let choix;
+
+    do {
+
+        afficherMenu();
+
+        choix = prompt("Votre choix : ");
+
+        switch (choix) {
+
+            case "1":
+                afficherTrajets();
+                break;
+
+            case "2":
+                acheterTicket();
+                break;
+
+            case "3":
+                afficherTickets();
+                break;
+
+            case "4":
+                annulerTicket();
+                break;
+
+            case "5":
+                rechercherTicket();
+                break;
+
+            case "6":
+                filtrerTrajets();
+                break;
+
+            case "7":
+                trierTrajets();
+                break;
+
+            case "8":
+                statistiques();
+                break;
+
+            case "0":
+                console.log("Au revoir !");
+                break;
+
+            default:
+                console.log("Choix invalide.");
+        }
+
+    } while (choix !== "0");
+}
+menu();
+
 
