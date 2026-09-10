@@ -460,3 +460,20 @@ function trierTrajets() {
     }
 }
 
+function statistiques() {
+
+    console.log("=== STATISTIQUES ===");
+
+    console.log("Nombre total de tickets : " + tickets.length);
+
+    let total = 0;
+
+    for (let i = 0; i < tickets.length; i++) {
+
+        total = total + tickets[i].prix;
+
+    }
+
+    console.log("Revenu total : " + total + " DH");
+}
+
