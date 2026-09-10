@@ -443,5 +443,20 @@ function filtrerTrajets() {
         );
     }
 }
+function trierTrajets() {
+    trips.sort(function(a, b) {
+        return a.price - b.price;
+    });
 
+    console.log("=== TRAJETS TRIÉS PAR PRIX ===");
+
+    for (let i = 0; i < trips.length; i++) {
+        console.log(
+            trips[i].id + " - " +
+            trips[i].departure + " -> " +
+            trips[i].destination +
+            " | Prix : " + trips[i].price + " DH"
+        );
+    }
+}
 
