@@ -317,3 +317,34 @@ function afficherTickets() {
 }
 
 afficherTickets();
+
+
+
+function annulerTicket() {
+
+    let idTicket = Number(prompt("Identifiant du ticket : "));
+
+    for (let i = 0; i < tickets.length; i++) {
+
+        if (tickets[i].id === idTicket) {
+
+            for (let j = 0; j < trips.length; j++) {
+
+                if (trips[j].id === tickets[i].trajetId) {
+                    trips[j].availableSeats++;
+                    break;
+                }
+            }
+
+            tickets.splice(i, 1);
+
+            console.log("Ticket annulé avec succès.");
+
+            return;
+        }
+    }
+
+    console.log("Ticket introuvable.");
+}
+
+annulerTicket();
