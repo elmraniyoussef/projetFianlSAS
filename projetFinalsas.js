@@ -217,7 +217,79 @@ function afficherTrajets(trips) {
 afficherTrajets(trips) ;   
 
 
+function rechercheTrajet(trips, idTrajet) {
+    let trajet;
 
+    for (let i = 0; i < trips.length; i++) {
+        if (trips[i].id === idTrajet) {
+            trajet = trips[i];
+            break;
+        }
+    }
 
-      
-  
+    if (trajet) {
+        console.log("#" + trajet.id, trajet.departure + " → " + trajet.destination);
+        console.log("Départ : " + trajet.departureTime);
+        console.log("Arrivée : " + trajet.arrivalTime);
+        console.log("Prix : " + trajet.price);
+        console.log("Places disponibles : " + trajet.availableSeats);
+    } else {
+        console.log("Aucun trajet trouvé pour cet id.");
+    }
+
+    return trajet || null;
+}
+
+function acheterTicket() {
+
+    let nomPassager = prompt("Nom du passager : ");
+    let idTrajet = Number(prompt("Identifiant du trajet : "));
+
+    // Rechercher le trajet
+    for (let i = 0; i < trips.length; i++) {
+
+        if (trips[i].id === idTrajet) {
+
+            // Vérifier les places
+            if (trips[i].availableSeats <= 0) {
+                console.log("Train complet.");
+                return;
+            }
+
+            // Créer le ticket
+            let ticket = {
+                id: tickets.length + 1,
+                passager: nomPassager,
+                trajetId: trips[i].id,
+                place: trips[i].placesDisponibles,
+                prix: trips[i].price
+            };
+
+            // Diminuer les places disponibles
+            trips[i].availableSeats--;
+
+            // Ajouter le ticket au tableau
+            tickets.push(ticket);
+
+            // Afficher le résultat
+            console.log("Ticket acheté avec succès.");
+            console.log("");
+            console.log("Ticket #" + ticket.id);
+            console.log("Passager : " + ticket.passager);
+            console.log(
+                "Trajet : " +
+                trips[i].departure +
+                " → " +
+                trips[i].destination
+            );
+            console.log("Place : " + ticket.place);
+            console.log("Prix : " + ticket.prix + " DH");
+
+            return;
+        }
+    }
+
+    // Trajet introuvable
+    console.log("Trajet introuvable.");
+}
+acheterTicket();
