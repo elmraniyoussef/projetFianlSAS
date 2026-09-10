@@ -261,11 +261,11 @@ function acheterTicket() {
                 id: tickets.length + 1,
                 passager: nomPassager,
                 trajetId: trips[i].id,
-                place: trips[i].placesDisponibles,
+                place: trips[i].availableSeats,
                 prix: trips[i].price
             };
 
-            // Diminuer les places disponibles
+            // Diminuer les places availableSeats
             trips[i].availableSeats--;
 
             // Ajouter le ticket au tableau
@@ -348,3 +348,21 @@ function annulerTicket() {
 }
 
 annulerTicket();
+
+function rechercherTicket() {
+    let nom = prompt("Nom du passager : ");
+
+    for (let i = 0; i < tickets.length; i++) {
+
+        if (tickets[i].passenger === nom) {
+            console.log("Ticket #" + tickets[i].id);
+            console.log("Passager : " + tickets[i].passenger);
+            console.log("Trajet : " + tickets[i].departure + " → " + tickets[i].destination);
+            console.log("Place : " + tickets[i].place);
+            console.log("Prix : " + tickets[i].price + " DH");
+        }
+
+    }
+}
+rechercherTicket()
+
