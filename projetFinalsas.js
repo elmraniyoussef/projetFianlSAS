@@ -293,3 +293,27 @@ function acheterTicket() {
     console.log("Trajet introuvable.");
 }
 acheterTicket();
+
+
+function afficherTickets() {
+
+    if (tickets.length === 0) {
+        console.log("Aucun ticket enregistré.");
+        return;
+    }
+
+    console.log("=== TICKETS ===");
+
+    for (let i = 0; i < tickets.length; i++) {
+
+        console.log("Ticket #" + tickets[i].id);
+        console.log("Passager : " + tickets[i].passager);
+        console.log("Trajet ID : " + tickets[i].trajetId);
+        console.log("Place : " + tickets[i].place);
+        console.log("Prix : " + tickets[i].prix + " DH");
+
+        console.log("-------------------------");
+    }
+}
+
+afficherTickets();
