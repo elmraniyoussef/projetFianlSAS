@@ -256,19 +256,22 @@ function acheterTicket() {
                 return;
             }
 
+            // Calculer le numéro de la place
+            let numeroPlace = 50 - trips[i].availableSeats + 1;
+
             // Créer le ticket
             let ticket = {
                 id: tickets.length + 1,
                 passager: nomPassager,
                 trajetId: trips[i].id,
-                place: trips[i].availableSeats,
+                place: numeroPlace,
                 prix: trips[i].price
             };
 
-            // Diminuer les places availableSeats
+            // Diminuer les places disponibles UNE SEULE FOIS
             trips[i].availableSeats--;
 
-            // Ajouter le ticket au tableau
+            // Ajouter le ticket
             tickets.push(ticket);
 
             // Afficher le résultat
@@ -289,11 +292,10 @@ function acheterTicket() {
         }
     }
 
-    // Trajet introuvable
     console.log("Trajet introuvable.");
 }
-// acheterTicket();
 
+// acheterTicket();
 
 function afficherTickets() {
 
@@ -315,6 +317,7 @@ function afficherTickets() {
         console.log("-------------------------");
     }
 }
+
 
 // afficherTickets();
 
@@ -342,25 +345,23 @@ function annulerTicket() {
 
             return;
         }
+        console.log("Ticket introuvable.");
     }
 
-    console.log("Ticket introuvable.");
 }
 // annulerTicket();
 
-function rechercherTicket() {
-    let nom = prompt("Nom du passager : ");
+function rechercherTicket(nom) {
+   let resultats=[];
+   let indexResultats=0
 
     for (let i = 0; i < tickets.length; i++) {
 
         if (tickets[i].passenger === nom) {
-            console.log("Ticket #" + tickets[i].id);
-            console.log("Passager : " + tickets[i].passenger);
-            console.log("Trajet : " + tickets[i].departure + " → " + tickets[i].destination);
-            console.log("Place : " + tickets[i].place);
-            console.log("Prix : " + tickets[i].price + " DH");
+            resultats[indexResultats]=tickets[i];
+            indexResultats++;
         }
-
+return resultats;
     }
 }
 // rechercherTicket()
@@ -378,7 +379,7 @@ function menu() {
         switch (choix) {
             
             case 1:
-                afficherTrajets();
+                afficherTrajets(trips) 
                 break;
 
             case 2:
@@ -394,7 +395,9 @@ function menu() {
                 break;
 
             case 5:
-                rechercherTicket();
+                let nom = prompt("Nom du passager : ");
+                let resultats=rechercherTicket(nom);
+                afficherTickets( resultats);
                 break;
 
             case 6:
@@ -475,32 +478,47 @@ function statistiques() {
     console.log("Revenu total : " + total + " DH");
 
     // Trajet le plus vendu
-    let compteur = {};
+  // Trajet le plus vendu
+let compteur = {};
 
-    for (let i = 0; i < tickets.length; i++) {
+for (let i = 0; i < tickets.length; i++) {
+    let id = tickets[i].trajetId;
 
-        let id = tickets[i].trajetId;
+    if (compteur[id] === undefined) {
+        compteur[id] = 1;
+    } else {
+        compteur[id]++;
+    }
+}
 
-        if (compteur[id] === undefined) {
-            compteur[id] = 1;
-        } else {
-            compteur[id]++;
+let trajetPlusVenduId = null;
+let max = 0;
+
+for (let id in compteur) {
+    if (compteur[id] > max) {
+        max = compteur[id];
+        trajetPlusVenduId = id;
+    }
+}
+
+if (trajetPlusVenduId !== null) {
+
+    // kanqlbo 3la trajet li 3ando had l-id f "trips", bla find()
+    let trajetTrouve = null;
+
+    for (let j = 0; j < trips.length; j++) {
+        if (trips[j].id == trajetPlusVenduId) {
+            trajetTrouve = trips[j];
+            break;
         }
     }
 
-    let trajetPlusVendu = null;
-    let max = 0;
-
-    for (let id in compteur) {
-
-        if (compteur[id] > max) {
-            max = compteur[id];
-            trajetPlusVendu = id;
-        }
+    if (trajetTrouve !== null) {
+        console.log("Trajet le plus vendu : " + trajetTrouve.departure + " -> " + trajetTrouve.destination);
+    } else {
+        console.log("Trajet le plus vendu : " + trajetPlusVenduId);
     }
 
-    if (trajetPlusVendu !== null) {
-        console.log("Trajet le plus vendu : " + trajetPlusVendu);
-        console.log("Nombre de tickets vendus : " + max);
-    }
+    console.log("Nombre de tickets vendus : " + max);
+}
 }
