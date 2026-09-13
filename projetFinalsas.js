@@ -197,7 +197,7 @@ function afficherMenu() {
     console.log("8. Statistiques");
     console.log("0. Quitter \n");
 }
-// afficherMenu()
+
 function afficherTrajets(trips) {
 
     for (let i in trips){
@@ -213,8 +213,7 @@ function afficherTrajets(trips) {
         console.log("-------------------------");
     }
 }
-
-// afficherTrajets(trips) ;   
+   
 
 
 function rechercheTrajet(trips, idTrajet) {
@@ -245,21 +244,20 @@ function acheterTicket() {
     let nomPassager = prompt("Nom du passager : ");
     let idTrajet = Number(prompt("Identifiant du trajet : "));
 
-    // Rechercher le trajet
     for (let i = 0; i < trips.length; i++) {
 
         if (trips[i].id === idTrajet) {
 
-            // Vérifier les places
+            
             if (trips[i].availableSeats <= 0) {
                 console.log("Train complet.");
                 return;
             }
 
-            // Calculer le numéro de la place
+            
             let numeroPlace = 50 - trips[i].availableSeats + 1;
 
-            // Créer le ticket
+            
             let ticket = {
                 id: tickets.length + 1,
                 passager: nomPassager,
@@ -268,13 +266,11 @@ function acheterTicket() {
                 prix: trips[i].price
             };
 
-            // Diminuer les places disponibles UNE SEULE FOIS
+            
             trips[i].availableSeats--;
 
-            // Ajouter le ticket
             tickets.push(ticket);
 
-            // Afficher le résultat
             console.log("Ticket acheté avec succès.");
             console.log("");
             console.log("Ticket #" + ticket.id);
@@ -295,9 +291,8 @@ function acheterTicket() {
     console.log("Trajet introuvable.");
 }
 
-// acheterTicket();
 
-function afficherTickets() {
+function afficherTickets(listeTickets)  {
 
     if (tickets.length === 0) {
         console.log("Aucun ticket enregistré.");
@@ -318,8 +313,6 @@ function afficherTickets() {
     }
 }
 
-
-// afficherTickets();
 
 
 
@@ -349,7 +342,7 @@ function annulerTicket() {
     }
 
 }
-// annulerTicket();
+
 
 function rechercherTicket(nom) {
    let resultats=[];
@@ -357,14 +350,16 @@ function rechercherTicket(nom) {
 
     for (let i = 0; i < tickets.length; i++) {
 
-        if (tickets[i].passenger === nom) {
+        if (tickets[i].passager === nom) {
             resultats[indexResultats]=tickets[i];
             indexResultats++;
         }
-return resultats;
+
     }
+return resultats;
+    
 }
-// rechercherTicket()
+
 
 function menu() {
 
@@ -387,7 +382,7 @@ function menu() {
                 break;
 
             case 3:
-                afficherTickets();
+                afficherTickets(tickets);
                 break;
 
             case 4:
@@ -477,8 +472,8 @@ function statistiques() {
 
     console.log("Revenu total : " + total + " DH");
 
-    // Trajet le plus vendu
-  // Trajet le plus vendu
+    
+  
 let compteur = {};
 
 for (let i = 0; i < tickets.length; i++) {
@@ -503,7 +498,6 @@ for (let id in compteur) {
 
 if (trajetPlusVenduId !== null) {
 
-    // kanqlbo 3la trajet li 3ando had l-id f "trips", bla find()
     let trajetTrouve = null;
 
     for (let j = 0; j < trips.length; j++) {
